@@ -16,6 +16,14 @@ namespace Infrastructure
 {
     public static class DependencyInjection
     {
+        public static IServiceCollection ConfigureOption(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.Configure<LendingConfig>(configuration.GetSection("LendingConfig"));
+            services.Configure<NotificationConfig>(configuration.GetSection("NotificationConfig"));
+            services.Configure<SsoConfig>(configuration.GetSection("SsoConfig"));
+            return services;
+        }
+
         public static IServiceCollection ConfigureDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<CPGDbContext>(options =>
